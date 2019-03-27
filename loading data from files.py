@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-import csv
+
 
 # Part 7
 '''
@@ -9,6 +9,10 @@ couple of ways one might do this. First, we'll use the built-in csv module to
 load CSV files, then we'll show how to utilize NumPy, which is a third-party module, 
 to load files.
 '''
+
+# Method 1 - more messy
+'''
+import csv
 x = []
 y = []
 
@@ -19,6 +23,15 @@ with open('example.txt', 'r') as csvfile:
 		y.append(int(row[1]))
 
 plt.plot(x,y, label='loaded from file.')
+'''
+
+# Method 2 - More common and faster
+import numpy as np
+
+x, y = np.loadtxt('example.txt', delimiter = ',', unpack = True) # unpack only works with 2 variables
+
+plt.plot(x,y)
+
 plt.xlabel('x')
 plt.ylabel('y')
 plt.title('Interesting Graph\nCheck it out')
