@@ -4,18 +4,13 @@ import urllib
 import matplotlib.dates as mdates
 
 
-# Part 8 & 9
+# Part 10
 '''
-Aside from loading data from the files, another popular source for data 
-is the internet. We can load data from the internet from a variety of ways, 
-but, for us, we're going to just simply read the source code of the website, 
-then use simple splitting to separate the data.
-'''
-
-'''
-Notes: Sources of data online are very vast.
-Quandl is a good example. In this example,
-we're using Yahoo Finances API
+In this Matplotlib tutorial, we're going to be talking about some 
+of the possible customizations to graphs. In order to start modifying 
+the subplots, we have to define them. We will talk about them soon, 
+but there are two major ways to define subplots, and to structure them. 
+For now, we'll just use one of them, but we will be explaining them shortly.
 '''
 
 def bytespdates2num(fmt, encoding = 'utf-8'):
@@ -27,7 +22,11 @@ def bytespdates2num(fmt, encoding = 'utf-8'):
 
 
 
-def graph_data(stock):
+def graph_data(stock):	
+
+	fig = plt.figure()
+	ax1 = plt.subplot2grid((1,1), (0,0)) #subplots
+
 
     # Unfortunately, Yahoo's API is no longer available
     # feel free to adapt the code to another source, or use this drop-in replacement.
@@ -63,11 +62,18 @@ def graph_data(stock):
 
 
     
-    plt.plot_date(date, closep)
+    ax1.plot_date(date, closep)
+	
+	for label in ax1.xaxis.get_ticklabels():
+		label.set_rotation(45)
+
+	ax1.grid(True) #, color = 'g', linestyle = '-')
+
     plt.xlabel('Date')
     plt.ylabel('Price')
     plt.title('Interesting Graph\nCheck it out')
     plt.legend()
+	plt.subplots_adjust(left = 0.09, bottom = 0.20, right = 0.94, top = 0.90, wspace = 0.2, hspace = 0)
     plt.show()
 
 graph_data('AAPL')
