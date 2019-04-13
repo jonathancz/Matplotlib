@@ -1,10 +1,9 @@
+# Part 18
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 import matplotlib.ticker as mticker
 from matplotlib.finance import candlestick_ohlc
 from matplotlib import style
-
-#Part 17
 
 import numpy as np
 import urllib
@@ -63,22 +62,32 @@ def graph_data(stock):
     ax1.xaxis.set_major_formatter(mdates.DateFormatter('%Y-%m-%d'))
     ax1.xaxis.set_major_locator(mticker.MaxNLocator(10))
     ax1.grid(True)
-    ax1.annotate('Bad News!',(date[9],highp[9]),
-                 xytext=(0.8, 0.9), textcoords='axes fraction',
-                 arrowprops = dict(facecolor='grey',color='grey'))
     
-##    # Text placement example:
+    bbox_props = dict(boxstyle='round',fc='w', ec='k',lw=1)
+    
+    ax1.annotate(str(closep[-1]), (date[-1], closep[-1]),
+                 xytext = (date[-1]+3, closep[-1]), bbox=bbox_props)
+
+    
+##    # Annotation example with arrow
+##    ax1.annotate('Bad News!',(date[11],highp[11]),
+##                 xytext=(0.8, 0.9), textcoords='axes fraction',
+##                 arrowprops = dict(facecolor='grey',color='grey'))
+##
+##    
+##    # Font dict example
 ##    font_dict = {'family':'serif',
 ##                 'color':'darkred',
 ##                 'size':15}
+##    # Hard coded text 
 ##    ax1.text(date[10], closep[1],'Text Example', fontdict=font_dict)
 
     plt.xlabel('Date')
     plt.ylabel('Price')
     plt.title(stock)
     #plt.legend()
-    plt.subplots_adjust(left=0.09, bottom=0.20, right=0.94, top=0.90, wspace=0.2, hspace=0)
+    plt.subplots_adjust(left=0.11, bottom=0.24, right=0.87, top=0.90, wspace=0.2, hspace=0)
     plt.show()
 
 
-graph_data('ebay')
+graph_data('EBAY')
